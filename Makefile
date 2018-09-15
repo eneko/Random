@@ -21,6 +21,9 @@ uninstall:
 xcode:
 	swift package generate-xcodeproj --enable-code-coverage
 
+zip: build
+	zip -D $(TOOL_NAME).macos.zip $(BUILD_PATH)
+
 get_sha:
 	curl -OLs https://github.com/eneko/$(TOOL_NAME)/archive/$(VERSION).tar.gz
 	shasum -a 256 $(TAR_FILENAME)

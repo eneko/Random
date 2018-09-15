@@ -6,6 +6,8 @@
 build/
 DerivedData/
 *.xcodeproj
+*.zip
+*.tar.gz
 
 ## Various settings
 *.pbxuser
