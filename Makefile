@@ -1,9 +1,10 @@
 TOOL_NAME = random
+VERSION = 0.0.1
 
 PREFIX = /usr/local
 INSTALL_PATH = $(PREFIX)/bin/$(TOOL_NAME)
 BUILD_PATH = .build/release/$(TOOL_NAME)
-TAR_FILENAME = $(TOOL_NAME)-$(VERSION).tar.gz
+TAR_FILENAME = $(VERSION).tar.gz
 
 .PHONY: build
 
@@ -19,4 +20,9 @@ uninstall:
 
 xcode:
 	swift package generate-xcodeproj --enable-code-coverage
+
+get_sha:
+	curl -OLs https://github.com/eneko/$(TOOL_NAME)/archive/$(VERSION).tar.gz
+	shasum -a 256 $(TAR_FILENAME)
+	rm $(TAR_FILENAME)
 

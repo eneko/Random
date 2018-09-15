@@ -60,12 +60,17 @@ $ random dice -n 6
 ```
 
 ## Installation
+Note: Requires Swift 4.2, works on Mac and Linux
+
+### With Homebrew
+```
+$ brew install eneko/tap/random
+```
 
 ### From Source
-Requires Swift 4.2, works on Mac and Linux
-
 ```
 $ git clone https://github.com/eneko/Random.git
 $ cd Random
 $ make
 ```
+
