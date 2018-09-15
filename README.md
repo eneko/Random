@@ -74,3 +74,9 @@ $ cd Random
 $ make
 ```
 
+### Download Binary
+```
+$ curl -Ls https://github.com/eneko/Random/releases/download/0.0.1/random.macos.zip -o /tmp/random.macos.zip
+$ unzip -j -d /usr/local/bin /tmp/random.macos.zip 
+```
+
