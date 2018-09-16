@@ -1,4 +1,3 @@
-import Foundation
 import CommandRegistry
 
 var commands = CommandRegistry(usage: "<subcommand> <options>", overview: "A random command line tool 🎲")

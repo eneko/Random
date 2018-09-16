@@ -3,40 +3,31 @@ import Utility
 import CommandRegistry
 import Logger
 
-class PickCommand: Command {
+class PickCommand: Command, LineProcessorType, NumberOptionable {
     let command = "pick"
     let overview = "Pick one from many (works with arguments and stdin)"
 
-    private var options: PositionalArgument<[String]>
+    let options: PositionalArgument<[String]>
+    let number: OptionArgument<Int>
 
     required init(parser: ArgumentParser) {
         let subparser = parser.add(subparser: command, overview: overview)
         options = subparser.add(positional: "options", kind: [String].self, optional: true, strategy: .upToNextOption, usage: "random pick optionA optionB...")
+        number = subparser.addNumberArgument(usage: "Number of items to pick")
     }
 
     func run(with arguments: ArgumentParser.Result) throws {
-        var options = arguments.get(self.options) ?? []
-        if StandardInput.hasData() {
-            let lines = StandardInput.readLines()
-            if lines.count == 1 {
-                options.append(contentsOf: lines[0].components(separatedBy: " "))
-            }
-            else {
-                options.append(contentsOf: lines)
-            }
-        }
-        if options.count == 1 {
-            options = options[0].map { String($0) }
-        }
-        pickOne(options: options)
-    }
+        let number = arguments.get(self.number) ?? 1
+        let params = arguments.get(self.options) ?? []
+        let inputLines = splitFirstLineIfNeeded(lines: StandardInput.readAvailableLines())
+        let options = splitWordIfNeeded(words: params + inputLines)
 
-    func pickOne(options: [String]) {
-        if let option = options.randomElement() {
-            Logger.standard.log(option)
+        let picks = Randomizer().pick(options: options, times: number)
+        if picks.isEmpty {
+            Logger.error.log("No options to pick from")
         }
         else {
-            Logger.error.log("No options to pick from")
+            Logger.standard.log(picks)
         }
     }
 

@@ -6,7 +6,7 @@ struct StandardInput {
     /// Useful to prevent blocking the process if when no data is available yet.
     ///
     /// - Returns: True if there is data waiting to be read.
-    static func hasData() -> Bool {
+    static func hasDataAvailable() -> Bool {
         guard let inputStream = InputStream(fileAtPath: "/dev/stdin") else {
             return false
         }
@@ -27,8 +27,8 @@ struct StandardInput {
     /// Will block process when used interactively or until data is fully read.
     ///
     /// - Returns: UTF8 String with full contents of stdin
-    static func readString() -> String {
-        return String(data: readData(), encoding: .utf8)?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+    static func readLine() -> String {
+        return Swift.readLine() ?? ""
     }
 
     /// Read full standard input text line by line.
@@ -36,7 +36,46 @@ struct StandardInput {
     ///
     /// - Returns: Array of strings with full contents of stdin
     static func readLines() -> [String] {
-        return AnyIterator { readLine() }.map { $0 }
+        return AnyIterator { Swift.readLine() }.map { $0 }
+    }
+
+}
+
+// MARK: - Non-blocking helpers
+
+extension StandardInput {
+
+    /// Read all data from stdin.
+    /// Returns immediatelly if no input is available.
+    ///
+    /// - Returns: Data with full contents of stdin
+    static func readAvailableData() -> Data? {
+        guard hasDataAvailable() else {
+            return nil
+        }
+        return readData()
+    }
+
+    /// Read full standard input text as UTF8 string.
+    /// Returns immediatelly if no input is available.
+    ///
+    /// - Returns: UTF8 String with full contents of stdin
+    static func readAvailableLine() -> String? {
+        guard hasDataAvailable() else {
+            return nil
+        }
+        return readLine()
+    }
+
+    /// Read full standard input text line by line.
+    /// Returns immediatelly if no input is available.
+    ///
+    /// - Returns: Array of strings with full contents of stdin
+    static func readAvailableLines() -> [String] {
+        guard hasDataAvailable() else {
+            return []
+        }
+        return readLines()
     }
 
 }
