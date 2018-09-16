@@ -40,6 +40,18 @@ $ random pick eneko
 e
 ```
 
+### Shuffle Command
+Shuffle  options passed in as parameters or via standard input in random order (`stdin`).
+
+```
+$ random shuffle 🍊 🍎 🍍 🍇
+🍍
+🍎
+🍊
+🍇
+```
+
+
 ### Dice Command
 Throw one or multiple dice.
 
