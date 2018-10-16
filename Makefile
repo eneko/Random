@@ -1,5 +1,5 @@
 TOOL_NAME = random
-VERSION = 0.0.1
+VERSION = 0.1.0
 
 PREFIX = /usr/local
 INSTALL_PATH = $(PREFIX)/bin/$(TOOL_NAME)
