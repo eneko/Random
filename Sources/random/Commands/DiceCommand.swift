@@ -6,11 +6,13 @@ import Logger
 class DiceCommand: Command, NumberOptionable {
     let command = "dice"
     let overview = "Throw one or multiple dice"
+    let subparser: ArgumentParser
+    var subcommands: [Command] = []
 
     let number: OptionArgument<Int>
 
     required init(parser: ArgumentParser) {
-        let subparser = parser.add(subparser: command, overview: overview)
+        subparser = parser.add(subparser: command, overview: overview)
         number = subparser.addNumberArgument(usage: "Number of dice to throw")
     }
 

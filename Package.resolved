@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/eneko/CommandRegistry.git",
         "state": {
           "branch": null,
-          "revision": "84b5e2b59dcd58fd1380f836a4bb70531112508c",
-          "version": "0.0.2"
+          "revision": "4c953e485307caf1b97565a0834ac447609647ff",
+          "version": "0.3.0"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/apple/swift-package-manager.git",
         "state": {
           "branch": null,
-          "revision": "6983434787dec4e543e9d398a0a9acf63ccd4da1",
-          "version": "0.2.1"
+          "revision": "235aacc514cb81a6881364b0fedcb3dd083228f3",
+          "version": "0.3.0"
         }
       }
     ]

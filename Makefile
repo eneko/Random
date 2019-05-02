@@ -1,5 +1,5 @@
 TOOL_NAME = random
-VERSION = 0.1.0
+VERSION = 0.2.0
 
 PREFIX = /usr/local
 INSTALL_PATH = $(PREFIX)/bin/$(TOOL_NAME)
@@ -13,7 +13,7 @@ install: build
 	install -C -m 755 $(BUILD_PATH) $(INSTALL_PATH)
 
 build:
-	swift build --disable-sandbox -c release -Xswiftc -static-stdlib
+	swift build --disable-sandbox -c release 
 
 uninstall:
 	rm -f $(INSTALL_PATH)

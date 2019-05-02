@@ -6,12 +6,14 @@ import Logger
 class PickCommand: Command, LineProcessorType, NumberOptionable {
     let command = "pick"
     let overview = "Pick one from many (works with arguments and stdin)"
+    let subparser: ArgumentParser
+    var subcommands: [Command] = []
 
     let options: PositionalArgument<[String]>
     let number: OptionArgument<Int>
 
     required init(parser: ArgumentParser) {
-        let subparser = parser.add(subparser: command, overview: overview)
+        subparser = parser.add(subparser: command, overview: overview)
         options = subparser.add(positional: "options", kind: [String].self, optional: true, strategy: .upToNextOption, usage: "random pick optionA optionB...")
         number = subparser.addNumberArgument(usage: "Number of items to pick")
     }
